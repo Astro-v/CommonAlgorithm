@@ -7,12 +7,14 @@ void quick_sort_1(typename std::list<T>::iterator beg, typename std::list<T>::it
 
     //partition the input array
     auto divide_point = std::partition(
-        beg, 
+        std::next(beg), 
         end, 
         [&](T const& t) {return t < pivot; });
 
-    quick_sort_1<T>(beg, divide_point);
-    quick_sort_1<T>(std::next(divide_point), end);
+    std::iter_swap(beg, std::prev(divide_point));
+
+    quick_sort_1<T>(beg, std::prev(divide_point));
+    quick_sort_1<T>(divide_point, end);
 
     return;  
 }

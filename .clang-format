@@ -1,0 +1,66 @@
+Language: Cpp
+BasedOnStyle:  Google
+# Taille max d'une ligne
+ColumnLimit: 120
+# Indentation de quatre espaces
+IndentWidth: 4
+# Taille des tabulations
+TabWidth: 4
+# Ne pas utiliser de tabulations
+UseTab: Never
+# Style des accolades pour l'initialisation des données
+Cpp20BracedInitListStyle: true
+# Argument des fonctions sur plusieurs lignes
+AllowAllArgumentsOnNextLine: true
+# Déclaration des fonctions sur plusieurs lignes
+AllowAllConstructorInitializersOnNextLine: true
+
+# Indentation des fonctions
+IndentFunctionDeclarationAfterType: true
+
+# Espaces 
+SpaceBeforeParens: ControlStatements
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceInEmptyParentheses: false
+SpacesInAngles: false
+SpacesInContainerLiterals: false
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+# Retour à la ligne
+BreakBeforeBraces: Allman
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializersBeforeComma: false
+BreakInheritanceList: BeforeColon
+BreakStringLiterals: false
+BreakAfterJavaFieldAnnotations: true
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnASingleLine: false
+AlwaysBreakTemplateDeclarations: true
+AlwaysBreakBeforeMultilineStrings: true
+AlwaysBreakAfterReturnType: None
+AlwaysBreakAfterDefinitionReturnType: None
+
+# Alignement
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignConsecutiveBitFields: true
+AlignConsecutiveMacros: true
+AlignEscapedNewlines: Left
+AlignOperands: true
+AlignTrailingComments: true
+AlignTrailingCommentsMinColumn: 40
+AlignTrailingCommentsMaxColumns: 120
+AlignTrailingCommentsOnColumn: 120
