@@ -1,66 +1,26 @@
-Language: Cpp
-BasedOnStyle:  Google
-# Taille max d'une ligne
-ColumnLimit: 120
-# Indentation de quatre espaces
+BasedOnStyle: Chromium
 IndentWidth: 4
-# Taille des tabulations
-TabWidth: 4
-# Ne pas utiliser de tabulations
+Language: Cpp
+Standard: c++14
+ColumnLimit: 160
+SortIncludes: true
+DerivePointerAlignment: false
+PointerAlignment: Left
+NamespaceIndentation: All
+MaxEmptyLinesToKeep: 1
 UseTab: Never
-# Style des accolades pour l'initialisation des données
-Cpp20BracedInitListStyle: true
-# Argument des fonctions sur plusieurs lignes
-AllowAllArgumentsOnNextLine: true
-# Déclaration des fonctions sur plusieurs lignes
-AllowAllConstructorInitializersOnNextLine: true
-
-# Indentation des fonctions
-IndentFunctionDeclarationAfterType: true
-
-# Espaces 
-SpaceBeforeParens: ControlStatements
-SpaceAfterCStyleCast: false
-SpaceAfterLogicalNot: false
-SpaceAfterTemplateKeyword: true
-SpaceBeforeAssignmentOperators: true
-SpaceBeforeCpp11BracedList: true
-SpaceBeforeCtorInitializerColon: true
-SpaceBeforeInheritanceColon: true
-SpaceBeforeRangeBasedForLoopColon: true
-SpaceInEmptyParentheses: false
-SpacesInAngles: false
-SpacesInContainerLiterals: false
-SpacesInCStyleCastParentheses: false
-SpacesInParentheses: false
-SpacesInSquareBrackets: false
-
-# Retour à la ligne
-BreakBeforeBraces: Allman
-BreakBeforeBinaryOperators: None
-BreakBeforeTernaryOperators: true
-BreakConstructorInitializersBeforeComma: false
-BreakInheritanceList: BeforeColon
-BreakStringLiterals: false
-BreakAfterJavaFieldAnnotations: true
-AllowShortIfStatementsOnASingleLine: false
-AllowShortLoopsOnASingleLine: false
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterObjCDeclaration: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
+  IndentBraces: false
+  AfterCaseLabel: true
 AllowShortFunctionsOnASingleLine: None
-AllowShortBlocksOnASingleLine: false
-AlwaysBreakTemplateDeclarations: true
-AlwaysBreakBeforeMultilineStrings: true
-AlwaysBreakAfterReturnType: None
-AlwaysBreakAfterDefinitionReturnType: None
-
-# Alignement
-AlignAfterOpenBracket: Align
-AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
-AlignConsecutiveBitFields: true
-AlignConsecutiveMacros: true
-AlignEscapedNewlines: Left
-AlignOperands: true
-AlignTrailingComments: true
-AlignTrailingCommentsMinColumn: 40
-AlignTrailingCommentsMaxColumns: 120
-AlignTrailingCommentsOnColumn: 120

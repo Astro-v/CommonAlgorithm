@@ -65,8 +65,7 @@ std::list<T> parallel_quick_sort_3(std::list<T> input)
 
     auto new_lower = parallel_quick_sort_3<T>(std::move(lower_list));
     // apply async to recursive
-    auto new_upper_future =
-        std::async(std::launch::async | std::launch::deferred, &parallel_quick_sort_3<T>, std::move(input));
+    auto new_upper_future = std::async(std::launch::async | std::launch::deferred, &parallel_quick_sort_3<T>, std::move(input));
 
     result.splice(result.begin(), new_lower);
     result.splice(result.end(), new_upper_future.get());
@@ -94,8 +93,7 @@ std::list<T> parallel_quick_sort_4(std::list<T> input)
     lower_list.splice(lower_list.end(), input, input.begin(), divide_point);
 
     // apply async to recursive
-    auto new_upper_future =
-        std::async(std::launch::async | std::launch::deferred, &parallel_quick_sort_4<T>, std::move(input));
+    auto new_upper_future = std::async(std::launch::async | std::launch::deferred, &parallel_quick_sort_4<T>, std::move(input));
 
     auto new_lower = parallel_quick_sort_4<T>(std::move(lower_list));
 
@@ -122,8 +120,7 @@ void parallel_quick_sort_5(typename std::list<T>::iterator beg, typename std::li
     if (depth > 0)
     {
         // apply async to recursive
-        auto handle = std::async(std::launch::async | std::launch::deferred, &parallel_quick_sort_5<T>, divide_point,
-                                 end, depth - 1);
+        auto handle = std::async(std::launch::async | std::launch::deferred, &parallel_quick_sort_5<T>, divide_point, end, depth - 1);
         parallel_quick_sort_5<T>(beg, std::prev(divide_point), depth - 1);
         handle.get();
     }

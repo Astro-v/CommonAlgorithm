@@ -12,13 +12,13 @@ template <typename T>
 void time_sort(void (*sort)(typename std::list<T>::iterator, typename std::list<T>::iterator), std::list<T> list);
 
 template <typename T>
-void time_sort(void (*sort)(typename std::list<T>::iterator, typename std::list<T>::iterator, int), std::list<T> list,
-               int param);
+void time_sort(void (*sort)(typename std::list<T>::iterator, typename std::list<T>::iterator, int), std::list<T> list, int param);
 
 template <typename T>
 void time_sort(std::list<T> (*sort)(std::list<T>), std::list<T> list);
 
-int main() {
+int main()
+{
     int N = 1000;
 
     // Génerer une liste aléatoire de 1000 éléments
@@ -26,7 +26,8 @@ int main() {
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(1, 1000);
     std::list<double> list;
-    for (int n = 0; n < N; ++n) {
+    for (int n = 0; n < N; ++n)
+    {
         list.push_back(dis(gen));
     }
 
@@ -66,7 +67,8 @@ int main() {
 }
 
 template <typename T>
-void time_sort(void (*sort)(typename std::list<T>::iterator, typename std::list<T>::iterator), std::list<T> list) {
+void time_sort(void (*sort)(typename std::list<T>::iterator, typename std::list<T>::iterator), std::list<T> list)
+{
     // Timer pour mesurer le temps d'exécution
     auto start = std::chrono::high_resolution_clock::now();
 
@@ -80,22 +82,27 @@ void time_sort(void (*sort)(typename std::list<T>::iterator, typename std::list<
     std::cout << "Time to sort: " << total.count() << " seconds";
 
     bool sorted = true;
-    for (auto it = list.begin(); it != std::prev(list.end()); ++it) {
-        if (*it > *std::next(it)) {
+    for (auto it = list.begin(); it != std::prev(list.end()); ++it)
+    {
+        if (*it > *std::next(it))
+        {
             sorted = false;
             break;
         }
     }
-    if (sorted) {
+    if (sorted)
+    {
         std::cout << " - OK" << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << " - NOK" << std::endl;
     }
 }
 
 template <typename T>
-void time_sort(void (*sort)(typename std::list<T>::iterator, typename std::list<T>::iterator, int), std::list<T> list,
-               int param) {
+void time_sort(void (*sort)(typename std::list<T>::iterator, typename std::list<T>::iterator, int), std::list<T> list, int param)
+{
     // Timer pour mesurer le temps d'exécution
     auto start = std::chrono::high_resolution_clock::now();
 
@@ -109,21 +116,27 @@ void time_sort(void (*sort)(typename std::list<T>::iterator, typename std::list<
     std::cout << "Time to sort: " << total.count() << " seconds";
 
     bool sorted = true;
-    for (auto it = list.begin(); it != std::prev(list.end()); ++it) {
-        if (*it > *std::next(it)) {
+    for (auto it = list.begin(); it != std::prev(list.end()); ++it)
+    {
+        if (*it > *std::next(it))
+        {
             sorted = false;
             break;
         }
     }
-    if (sorted) {
+    if (sorted)
+    {
         std::cout << " - OK" << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << " - NOK" << std::endl;
     }
 }
 
 template <typename T>
-void time_sort(std::list<T> (*sort)(std::list<T>), std::list<T> list) {
+void time_sort(std::list<T> (*sort)(std::list<T>), std::list<T> list)
+{
     // Timer pour mesurer le temps d'exécution
     auto start = std::chrono::high_resolution_clock::now();
 
@@ -137,15 +150,20 @@ void time_sort(std::list<T> (*sort)(std::list<T>), std::list<T> list) {
     std::cout << "Time to sort: " << total.count() << " seconds";
 
     bool sorted = true;
-    for (auto it = output.begin(); it != std::prev(output.end()); ++it) {
-        if (*it > *std::next(it)) {
+    for (auto it = output.begin(); it != std::prev(output.end()); ++it)
+    {
+        if (*it > *std::next(it))
+        {
             sorted = false;
             break;
         }
     }
-    if (sorted) {
+    if (sorted)
+    {
         std::cout << " - OK" << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << " - NOK" << std::endl;
     }
 }

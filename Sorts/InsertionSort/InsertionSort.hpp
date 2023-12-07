@@ -8,4 +8,4 @@ void insertion_sort_1(typename std::list<T>::iterator beg, typename std::list<T>
 
 #include "InsertionSort.ipp"
 
-#endif // __INSERTION_SORT_HPP__
+#endif  // __INSERTION_SORT_HPP__

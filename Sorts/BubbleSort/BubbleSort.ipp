@@ -13,7 +13,7 @@ void bubble_sort_1(typename std::list<T>::iterator beg, typename std::list<T>::i
     }
 }
 
-template<typename T>
+template <typename T>
 std::list<T> bubble_sort_2(std::list<T> input)
 {
     // On crée une copie de la liste
