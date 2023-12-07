@@ -19,7 +19,7 @@ void time_sort(std::list<T> (*sort)(std::list<T>), std::list<T> list);
 
 int main()
 {
-    int N = 1000;
+    int N = 10000;
 
     // Génerer une liste aléatoire de 1000 éléments
     std::random_device rd;
@@ -64,6 +64,8 @@ int main()
     // Insertion Sort
     std::cout << "insertion_sort_1 - ";
     time_sort<double>(insertion_sort_1<double>, list);
+    std::cout << "insertion_sort_2 - ";
+    time_sort<double>(insertion_sort_2<double>, list);
 }
 
 template <typename T>
