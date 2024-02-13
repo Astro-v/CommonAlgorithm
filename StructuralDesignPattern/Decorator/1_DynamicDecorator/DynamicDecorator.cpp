@@ -92,3 +92,23 @@ struct TransparentShape : Shape
         return oss.str();
     }
 };
+
+void wrapper()
+{
+    Circle circle{5};
+    cout << circle.str() << endl;
+
+    ColoredShape red_circle{circle, "red"};
+    cout << red_circle.str() << endl;
+
+    // red_circle.resize(); // oops
+
+    TransparentShape red_half_visible_circle{red_circle, 128};
+    cout << red_half_visible_circle.str() << endl;
+}
+
+int main()
+{
+    wrapper();
+    return 0;
+}

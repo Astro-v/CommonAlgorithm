@@ -103,3 +103,46 @@ struct TransparentShape : T
         return oss.str();
     }
 };
+
+void mixin_inheritance()
+{
+    // won't work without a default constructor
+    ColoredShape<Circle> green_circle{"green"};
+    green_circle.radius = 123;
+    cout << green_circle.str() << endl;
+
+    TransparentShape<ColoredShape<Square>> blue_invisible_square{0};
+    blue_invisible_square.color = "blue";
+    blue_invisible_square.side = 321;
+    cout << blue_invisible_square.str() << endl;
+}
+
+
+void constructor_forwarding()
+{
+    struct NotAShape
+    {
+        virtual string str() const
+        {
+            return string{};
+        }
+    };
+
+    // we don't want this to be legal, thus a static_assert above
+    // ColoredShape<NotAShape> legal;
+
+    // no code completion for this case
+    // can comment out argument, too! (default constructor)
+    TransparentShape<Square> hidden_square{1, 2};
+    cout << hidden_square.str() << endl;
+
+    ColoredShape<TransparentShape<Square>> sq = {"red", 51, 5};
+    cout << sq.str() << endl;
+}
+
+int main()
+{
+    mixin_inheritance();
+    constructor_forwarding();
+    return 0;
+}
