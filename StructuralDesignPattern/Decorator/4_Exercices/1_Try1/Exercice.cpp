@@ -19,60 +19,42 @@ struct Rose : Flower
 
 struct RedFlower : Flower
 {
-    Flower& flower;
     function<string()> func;
     
-    RedFlower(Flower& flower) : flower(flower), func([](){ostringstream oss;
-        oss  << " and red";
+    RedFlower(Flower& flower) : func([&flower](){ostringstream oss;
+        oss << flower.str() << " and red";
         return oss.str();}) {}
 
-    RedFlower(Rose& flower) : flower(flower), func([](){ostringstream oss;
-        oss << " that is red";
+    RedFlower(Rose& flower) : func([&flower](){ostringstream oss;
+        oss << flower.str() << " that is red";
         return oss.str();}) {}
 
-    RedFlower(RedFlower& flower) : flower(flower), func([](){ostringstream oss;
+    RedFlower(RedFlower& flower) : func([&flower](){ostringstream oss;
+        oss << flower.str();
         return oss.str();}) {}
 
     string str() override {
-        static bool called = false;
-        called = false;
-        ostringstream oss;
-        oss << flower.str();
-        if (!called)
-        {
-            called = true;
-            oss << func();
-        }
-        return oss.str();
+        return func();
     }
 };
 
 struct BlueFlower : Flower
 {
-    Flower& flower;
     function<string()> func;
     
-    BlueFlower(Flower& flower) : flower(flower),  func([](){ostringstream oss;
-        oss << " and blue";
+    BlueFlower(Flower& flower) : func([&flower](){ostringstream oss;
+        oss << flower.str() << " and blue";
         return oss.str();}) {}
 
-    BlueFlower(Rose& flower) : flower(flower),  func([](){ostringstream oss;
-        oss << " that is blue";
+    BlueFlower(Rose& flower) : func([&flower](){ostringstream oss;
+        oss << flower.str() << " that is blue";
         return oss.str();}) {}
 
-    BlueFlower(BlueFlower& flower) : flower(flower), func([](){ostringstream oss;
+    BlueFlower(BlueFlower& flower) : func([&flower](){ostringstream oss;
+        oss << flower.str();
         return oss.str();}) {}
 
     string str() override {
-        static bool called = false;
-        called = false;
-        ostringstream oss;
-        oss << flower.str();
-        if (!called)
-        {
-            called = true;
-            oss << func();
-        }
-        return oss.str();
+        return func();
     }
 };
