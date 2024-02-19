@@ -64,6 +64,7 @@ std::vector<Token> lex(const std::string& input)
             // Nothing
         }
     }
+    return result;
 }
 
 // PARSING
@@ -116,33 +117,62 @@ struct BinaryOperation : Element
     }
 };
 
-std::unique_ptr<Element> parse(const std::vector<Token>& tokens, std::map<char, int> variables)
+std::shared_ptr<Element> parse(const std::vector<Token>& tokens, std::map<char, int>* variables)
 {
     if (tokens.size() == 1 && tokens.at(0).type == Token::Type::integer)
-        auto result = std::make_unique<BinaryOperation>();
-    bool rhs = false;
-    for (int i = 0; i < tokens.size(); ++i)
     {
-        switch (tokens[i].type)
+        return std::make_shared<Integer>(std::stoi(tokens.at(0).text));
+    }
+    else if (tokens.size() == 1 && tokens.at(0).type == Token::Type::variable)
+    {
+        return std::make_shared<Variable>(tokens.at(0).text.at(0), variables);
+    }
+
+    auto result = std::make_shared<BinaryOperation>();
+    bool rhs = false;
+    for (auto it = tokens.begin(); it != tokens.end(); ++it)
+    {
+        switch (it->type)
         {
             case Token::Type::integer:
                 if (!rhs)
                 {
-                    result->lhs = std::make_shared<Integer>(std::stoi(tokens[i].text));
+                    result->lhs = std::make_shared<Integer>(std::stoi(it->text));
                     rhs = true;
                 }
                 else
                 {
-                    result->rhs = parse
+                    result->rhs = parse({it, tokens.end()}, variables);
+                    it = tokens.end() - 1;
                 }
+                break;
+            case Token::Type::variable:
+                if (!rhs)
+                {
+                    result->lhs = std::make_shared<Variable>(it->text.at(0), variables);
+                    rhs = true;
+                }
+                else
+                {
+                    result->rhs = parse({it, tokens.end()}, variables);
+                    it = tokens.end() - 1;
+                }
+                break;
+            case Token::Type::plus:
+                result->type = BinaryOperation::addition;
+                break;
+            case Token::Type::minus:
+                result->type = BinaryOperation::subtraction;
                 break;
         }
     }
+    return result;
 }
 
 bool static_analysis(const std::vector<Token>& tokens, std::map<char, int> variables)
 {
-    for (const Token& token : tokens)
+    int i = 1;
+    for (auto token : tokens)
     {
         if (token.type == Token::Type::variable)
         {
@@ -161,5 +191,17 @@ struct ExpressionProcessor
 
     int calculate(const std::string& expression)
     {
+        auto lexing = lex(expression);
+        if (static_analysis(lexing, variables))
+            return 0;
+        return parse(lexing, &variables)->eval();
     }
 };
+
+int main()
+{
+    ExpressionProcessor ep;
+    ep.variables['x'] = 10;
+    ep.variables['t'] = 4;
+    std::cout << ep.calculate("1+4+6+x+t") << std::endl;
+}
