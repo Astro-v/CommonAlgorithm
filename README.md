@@ -2,11 +2,14 @@
 
 ## Introduction
 
+```
 Ce répertoire gitlab a pour objectif de référencé les différentes structures algorithmiques de base en C++.
 On s'intéresse dans un premiers temps aux Design pattern en C++ modern. Ces pattern sont issus du cours de Dmitri Nesteruk sur Udemy.
+```
 
 ## Design Pattern
 
+```
 Il existe 3 types de design pattern :
 
 
@@ -23,17 +26,21 @@ Il existe 3 types de design pattern :
 |            |            | Strategy/Policy        |
 |            |            | Template method        |
 |            |            | Visitor                |
+```
 
 ### Creational
 
 #### Builder
 
+```
 Le design pattern **builder** est utile lorsqu'on souhaite créer un objet de façon incrémentale.
 
 *Exemple : Pour construire du code html, on peut le créer de façon incrémental en ajoutant récurcivement des balises enfants aux balises parents*
+```
 
 #### Factories
 
+```
 **Problem it solve :** Il n'est parfois pas possible de surcharger le constructeur. *Pour un point, il peut être définit avec des coordonné polaire ou carthesienne*
 
 Le design pattern **factory** peut prendre différentes formes :
@@ -49,10 +56,13 @@ Le design pattern **factory** peut prendre différentes formes :
 *Exemple : Coffee et Tea herite de HotDrink*
 *CoffeeFactory et TeaFactory herite de HotDrinkFactory, ils permetent de créer des Tea et des Coffee avec des volumes quelconques.*
 *DrinkFactory permet de créer des Tea et des Coffee avec des volumes pré-définis*
+```
 
 #### Prototype
 
+```
 Le **prototype** consiste à créer un nouvel objet à partir d'une base déjà établie. *La classe contact stock les nom, prenom et l'adresse, un prototype consite par exemple à créer une adresse générique et de pouvoir enregistrer les contacts sans avoir à saisir à nouveau les adresse*
+```
 
 #### Singleton
 
