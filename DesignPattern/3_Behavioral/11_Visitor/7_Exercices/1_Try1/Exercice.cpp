@@ -1,12 +1,17 @@
+#include <iostream>
 #include <sstream>
 #include <string>
 using namespace std;
 
+struct AdditionExpression;
+struct MultiplicationExpression;
+struct Value;
+
 struct ExpressionVisitor
 {
-    virtual void accept(AdditionExpression* ae) = 0;
-    virtual void accept(MultiplicationExpression* me) = 0;
-    virtual void accept(Value* v) = 0;
+    virtual void accept(AdditionExpression& ae) = 0;
+    virtual void accept(MultiplicationExpression& me) = 0;
+    virtual void accept(Value& v) = 0;
 };
 
 struct Expression
@@ -14,21 +19,25 @@ struct Expression
     virtual void visit(ExpressionVisitor& ev) = 0;
 };
 
-struct Value : Expression
+template <typename T>
+struct ExpressionCRTP : Expression
+{
+    void visit(ExpressionVisitor& ev) override
+    {
+        ev.accept(static_cast<T&>(*this));
+    }
+};
+
+struct Value : ExpressionCRTP<Value>
 {
     int value;
 
     Value(int value) : value(value)
     {
     }
-
-    void visit(ExpressionVisitor& ev) override
-    {
-        ev.accept(this);
-    }
 };
 
-struct AdditionExpression : Expression
+struct AdditionExpression : ExpressionCRTP<AdditionExpression>
 {
     Expression &lhs, &rhs;
 
@@ -36,13 +45,12 @@ struct AdditionExpression : Expression
     {
     }
 
-    void visit(ExpressionVisitor& ev) override
+    AdditionExpression(Expression&& lhs, Expression&& rhs) : lhs(lhs), rhs(rhs)
     {
-        ev.accept(this);
     }
 };
 
-struct MultiplicationExpression : Expression
+struct MultiplicationExpression : ExpressionCRTP<MultiplicationExpression>
 {
     Expression &lhs, &rhs;
 
@@ -50,37 +58,45 @@ struct MultiplicationExpression : Expression
     {
     }
 
-    void visit(ExpressionVisitor& ev) override
+    MultiplicationExpression(Expression&& lhs, Expression&& rhs) : lhs(lhs), rhs(rhs)
     {
-        ev.accept(this);
     }
 };
 
 struct ExpressionPrinter : ExpressionVisitor
 {
     ostringstream oss;
+    void accept(AdditionExpression& ae) override
+    {
+        oss << "(";
+        ae.lhs.visit(*this);
+        oss << "+";
+        ae.rhs.visit(*this);
+        oss << ")";
+    }
 
-    void accept(AdditionExpression* ae) override;
-    void accept(MultiplicationExpression* me) override;
-    void accept(Value* v) override;
+    void accept(MultiplicationExpression& me) override
+    {
+        me.lhs.visit(*this);
+        oss << "*";
+        me.rhs.visit(*this);
+    }
+
+    void accept(Value& v) override
+    {
+        oss << v.value;
+    }
 
     string str() const
-    { /* todo */
+    {
+        return oss.str();
     }
 };
 
-void ExpressionPrinter::accept(AdditionExpression* ae)
+int main()
 {
-}
-
-void ExpressionPrinter::accept(MultiplicationExpression* me)
-{
-    me->lhs.visit(*this);
-    oss << "*";
-    me->rhs.visit(*this);
-}
-
-void ExpressionPrinter::accept(Value* v)
-{
-    oss << v->value;
+    auto e = AdditionExpression{MultiplicationExpression{Value{10}, AdditionExpression{Value{3}, Value{5}}}, Value{4}};
+    auto ep = ExpressionPrinter{};
+    ep.accept(e);
+    std::cout << ep.str() << std::endl;
 }
