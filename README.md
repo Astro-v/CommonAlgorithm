@@ -55,6 +55,21 @@
 
 #### Singleton
 
+> **Motivation :** Il est parfois pertinant de n'avoir qu'une seul instance d'un objet dans le système. *Pour une 'database' ou un 'object factory'*
+> C'est d'autant plus nécessaire dans les cas ou le constructeur est couteux. Il est plus intéressant de ne l'appelé qu'une fois. Ainsi, on fournis à tous les utilisateurs la même instance de l'objet.
+> Il est aussi intéressant d'empécher l'utilisateur de créer des copies de l'objet.
+
+> **Singleton :** Créer un singleton 'safe' est plutot simple :
+> - Rendre le constructeur private ou protected et delete les copy constructor et copy assignment operators
+> - Créer une méthode static qui retourne une référence vers un membre static
+> - Ce genre d'initialisation est garantie thread-safe depuis C++11
+> Le problème est que les types dépendant du singleton sont dificile à tester
+> Pour résoudre ce problème, il est intéressant de ne pas dépendre du singleton mais plutot d'une abstraction (une interface)
+
+> **Singleton DI :** Boost DI permet de géré les injections de dépendance
+
+> **Multiton :** Le multiton est un singleton qui permet de créer plusieurs instance de façon controlé.
+
 ### Structural
 
 ### Behavioral
