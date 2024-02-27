@@ -9,9 +9,20 @@ On s'intéresse dans un premiers temps aux Design pattern en C++ modern. Ces pat
 
 Il existe 3 types de design pattern :
 
-- Creational
-- Structural
-- Behavioral
+
+| Creational | Structural | Behavioral             |
+| ---------- | ---------- | ---------------------- |
+| Builder    | Adapter    | Chain of resposibility |
+| Factories  | Bridge     | Command                |
+| Prototype  | Composite  | Interpreter            |
+| Singleton  | Decorator  | Iterator               |
+|            | Facade     | Mediator               |
+|            | Flyweight  | Memento                |
+|            | Proxy      | Observer               |
+|            |            | State                  |
+|            |            | Strategy/Policy        |
+|            |            | Template method        |
+|            |            | Visitor                |
 
 ### Creational
 
